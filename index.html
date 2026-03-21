@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iTreeView | Structured CAD Tree Visualization</title>
+    <meta
+        name="description"
+        content="iTreeView is a CAD application that extracts model properties and displays them in a structured tree view for easier review and understanding."
+    />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="hero">
+        <nav class="navbar">
+            <div class="brand">
+                <img src="images/iTreeViewLogo.png" alt="iTreeView Logo" class="nav-logo" />
+                <span class="logo-text">iTreeView</span>
+            </div>
+
+            <div class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#features">Features</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="eyebrow">Structured CAD tree visualization</p>
+
+                <h1>Turn complex CAD data into a clear visual tree.</h1>
+
+                <p class="hero-description">
+                    iTreeView is an application that extracts properties from models and
+                    displays them in a structured tree view, helping users understand
+                    assemblies, relationships, and component data faster.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get Beta Access</a>
+                    <a href="#overview" class="btn btn-secondary">View Features</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <button
+                    class="software-frame hero-screenshot-button"
+                    data-image="images/main-interface.png"
+                    data-title="Main Interface"
+                    aria-label="Open main interface screenshot"
+                >
+                    <img
+                        src="images/main-interface.png"
+                        alt="iTreeView software screenshot"
+                        class="product-screenshot"
+                    />
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="overview" class="section compact-section">
+        <div class="section-header narrow">
+            <p class="section-eyebrow">Overview</p>
+            <h2>What iTreeView does</h2>
+            <p class="section-text">
+                iTreeView extracts properties from CAD models and displays them in a
+                structured tree view so engineers can review assemblies, locate
+                components, and generate documentation more efficiently.
+            </p>
+        </div>
+
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h3>Structured data extraction</h3>
+                <p>Pulls useful component data into an organized and readable tree.</p>
+            </div>
+            <div class="summary-card">
+                <h3>Visual assembly understanding</h3>
+                <p>Shows parent-child relationships in a clear graphical format.</p>
+            </div>
+            <div class="summary-card">
+                <h3>Documentation tools</h3>
+                <p>Exports BOM and canvas information into formats that are easier to share.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section section-alt compact-section">
+        <div class="section-header">
+            <p class="section-eyebrow">Feature Overview</p>
+            <h2>Core application functions</h2>
+            <p class="section-text">
+                Built to simplify CAD assembly review, property extraction, and communication.
+            </p>
+        </div>
+
+        <div class="accordion">
+            <details class="accordion-item">
+                <summary>Inventor Imports</summary>
+                <div class="accordion-content">
+                    <div class="feature-card">
+                        <h4>Load from Open IAM</h4>
+                        <ul>
+                            <li>Connects to the currently open CAD assembly.</li>
+                            <li>Extracts assembly structure and component properties.</li>
+                            <li>Builds the initial tree structure used by iTreeView.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Refresh</h4>
+                        <ul>
+                            <li>Re-reads the CAD assembly and updates the tree.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li>Allows the user to select the properties to extract from CAD.</li>
+                            <li>Metadata can include:</li>
+                        </ul>
+                        <div class="pill-list">
+                            <span>Part Number</span>
+                            <span>Description</span>
+                            <span>Material</span>
+                            <span>Quantity</span>
+                            <span>Mass</span>
+                            <span>Assembly Mass with/without Ref Mass</span>
+                            <span>Mass Overridden</span>
+                            <span>Assembly Relationships</span>
+                            <span>Custom Properties</span>
+                        </div>
+                        <p class="note">
+                            Note: Some properties may not work as expected during beta production of the application.
+                        </p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="accordion-item">
+                <summary>Inventor Actions</summary>
+                <div class="accordion-content">
+                    <div class="feature-card">
+                        <h4>Select in CAD</h4>
+                        <ul>
+                            <li>Highlights the selected component directly in the CAD model.</li>
+                            <li>Helps quickly locate parts within large assemblies.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Zoom to Component</h4>
+                        <ul>
+                            <li>Automatically zooms the CAD view to the selected component.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Open File</h4>
+                        <ul>
+                            <li>Opens the source part or subassembly file in CAD.</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+            <details class="accordion-item">
+                <summary>Export Tools</summary>
+                <div class="accordion-content">
+                    <div class="feature-card">
+                        <h4>Export BOM to Excel</h4>
+                        <ul>
+                            <li>Exports the TreeView BOM with all selected properties to Excel.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Export Canvas Image</h4>
+                        <ul>
+                            <li>Generates a copy of the Canvas Tree View into Excel.</li>
+                            <li>Includes:</li>
+                        </ul>
+                        <div class="pill-list">
+                            <span>Hierarchical Structure</span>
+                            <span>Part Number</span>
+                            <span>Description</span>
+                            <span>QTY</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Future Updates</h4>
+                        <div class="pill-list">
+                            <span>Selectable Properties for Each Node</span>
+                            <span>Node Color Selection</span>
+                            <span>Export to Visio</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details class="accordion-item">
+                <summary>Search</summary>
+                <div class="accordion-content">
+                    <div class="feature-card">
+                        <h4>Search Box</h4>
+                        <ul>
+                            <li>Instantly locate parts by part number, description, or name.</li>
+                            <li>Highlights matching components in the tree.</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+            <details class="accordion-item">
+                <summary>Canvas View</summary>
+                <div class="accordion-content">
+                    <div class="feature-card">
+                        <p>
+                            The main canvas displays the assembly structure as an intuitive
+                            visual tree where assemblies appear as parent nodes and
+                            subassemblies and parts branch underneath.
+                        </p>
+                        <p class="spacer-top">Each node can contain:</p>
+                        <div class="pill-list">
+                            <span>Component Image</span>
+                            <span>Part Number</span>
+                            <span>Description</span>
+                        </div>
+                        <p class="note">
+                            This allows engineers to understand complex assemblies at a glance.
+                        </p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="accordion-item">
+                <summary>Key Benefits</summary>
+                <div class="accordion-content">
+                    <div class="feature-card">
+                        <div class="pill-list">
+                            <span>Quickly visualize complex CAD assemblies</span>
+                            <span>Extract structured data from CAD models</span>
+                            <span>Generate documentation instantly</span>
+                            <span>Improve design reviews and collaboration</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </div>
+    </section>
+    <section id="screenshots" class="section compact-section">
+    <div class="section-header">
+        <p class="section-eyebrow">Screenshots</p>
+        <h2>See iTreeView in action</h2>
+        <p class="section-text">
+            Scroll through the screenshots below. Click any image to view it larger.
+        </p>
+    </div>
+
+    <div class="screenshot-slider-wrap">
+        <button class="slider-arrow slider-arrow-left" id="screenshotsPrev" aria-label="Previous screenshots">
+            &#10094;
+        </button>
+
+        <div class="screenshot-slider" id="screenshotSlider">
+            <button class="screenshot-card" data-image="images/main-interface.png" data-title="Main Interface">
+                <img src="images/main-interface.png" alt="Main interface" />
+                <p>Main Interface</p>
+            </button>
+
+            <button class="screenshot-card" data-image="images/canvas-view.png" data-title="Canvas Visualization">
+                <img src="images/canvas-view.png" alt="Canvas visualization" />
+                <p>Canvas Visualization</p>
+            </button>
+
+            <button class="screenshot-card" data-image="images/bom-export-excel.png" data-title="BOM Export to Excel">
+                <img src="images/bom-export-excel.png" alt="BOM export to Excel" />
+                <p>BOM Export to Excel</p>
+            </button>
+
+            <button class="screenshot-card" data-image="images/canvas-export-excel.png" data-title="Canvas Export to Excel">
+                <img src="images/canvas-export-excel.png" alt="Canvas export to Excel" />
+                <p>Canvas Export to Excel</p>
+            </button>
+        </div>
+
+        <button class="slider-arrow slider-arrow-right" id="screenshotsNext" aria-label="Next screenshots">
+            &#10095;
+        </button>
+    </div>
+</section>
+
+
+
+
+
+
+    <section id="contact" class="section section-alt compact-section">
+        <div class="section-header narrow">
+            <p class="section-eyebrow">Contact</p>
+            <h2>Interested in beta access?</h2>
+            <p class="section-text">
+                Use your real contact email here when you are ready.
+            </p>
+
+            <a class="contact-link" href="mailto:info@itreeview.com">info@itreeview.com</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 iTreeView. All rights reserved.</p>
+        <p class="legal-note">
+            iTreeView is an independent application and is not affiliated with, endorsed by,
+            or sponsored by Autodesk, Inc. Autodesk and Inventor are trademarks of Autodesk, Inc.
+        </p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
+            <img id="lightboxImage" src="" alt="Expanded screenshot" />
+            <p id="lightboxTitle"></p>
+        </div>
+    </div>
+    <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxTitle = document.getElementById("lightboxTitle");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const screenshotCards = document.querySelectorAll(".screenshot-card, .hero-screenshot-button");
+
+    screenshotCards.forEach(card => {
+        card.addEventListener("click", () => {
+            const imageSrc = card.getAttribute("data-image");
+            const imageTitle = card.getAttribute("data-title");
+
+            lightboxImage.src = imageSrc;
+            lightboxTitle.textContent = imageTitle;
+            lightbox.classList.add("open");
+            document.body.classList.add("no-scroll");
+        });
+    });
+
+    function closeLightbox() {
+        lightbox.classList.remove("open");
+        document.body.classList.remove("no-scroll");
+        lightboxImage.src = "";
+        lightboxTitle.textContent = "";
+    }
+
+    lightboxClose.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (event) => {
+        if (
+            event.target.classList.contains("lightbox") ||
+            event.target.classList.contains("lightbox-backdrop")
+        ) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeLightbox();
+        }
+    });
+
+    const accordionItems = document.querySelectorAll(".accordion-item");
+
+    accordionItems.forEach(item => {
+        item.addEventListener("toggle", () => {
+            if (item.open) {
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.open = false;
+                    }
+                });
+            }
+        });
+    });
+
+    const screenshotSlider = document.getElementById("screenshotSlider");
+    const screenshotsPrev = document.getElementById("screenshotsPrev");
+    const screenshotsNext = document.getElementById("screenshotsNext");
+
+    function getScrollAmount() {
+        const firstCard = screenshotSlider.querySelector(".screenshot-card");
+        if (!firstCard) return 300;
+
+        const cardStyle = window.getComputedStyle(firstCard);
+        const gap = 14;
+        return firstCard.offsetWidth + gap;
+    }
+
+    screenshotsPrev.addEventListener("click", () => {
+        screenshotSlider.scrollBy({
+            left: -getScrollAmount(),
+            behavior: "smooth"
+        });
+    });
+
+    screenshotsNext.addEventListener("click", () => {
+        screenshotSlider.scrollBy({
+            left: getScrollAmount(),
+            behavior: "smooth"
+        });
+    });
+</script>
+
+
+
+
+
+</body>
+</html>
