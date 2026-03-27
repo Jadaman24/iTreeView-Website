@@ -627,9 +627,14 @@ a {
         max-height: 76vh;
     }
 
-    .hero-video-wrapper {
+.hero-image {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-video-wrapper {
     width: 100%;
-    max-width: 900px;
+    max-width: 750px;   /* 👈 THIS controls final size */
     aspect-ratio: 16 / 9;
     border-radius: 16px;
     overflow: hidden;
@@ -648,35 +653,13 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-}
-
-.play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 64px;
-    color: white;
-    background: rgba(0,0,0,0.6);
-    border-radius: 50%;
-    width: 90px;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
-}
-
-.play-button:hover {
-    background: rgba(0,0,0,0.8);
-    transform: translate(-50%, -50%) scale(1.1);
 }
 
 .hero-video-wrapper iframe {
     width: 100%;
     height: 100%;
     border: none;
+    display: block;
 }
 
 }

@@ -52,11 +52,11 @@
         <div class="hero-image">
             <div class="hero-video-wrapper" id="videoWrapper">
                 <div class="video-thumbnail" id="videoThumbnail">
-                    <img src="https://img.youtube.com/vi/0ZWSWcfjAhs/maxresdefault.jpg" alt="iTreeView Demo Video" />
-
-                    <div class="play-button">
-                        ▶
-                    </div>
+                    <img
+                        src="https://img.youtube.com/vi/-eYfc1fEL-s/maxresdefault.jpg"
+                        alt="iTreeView Demo Video"
+                    />
+                    <div class="play-button">▶</div>
                 </div>
             </div>
         </div>
@@ -406,17 +406,19 @@ screenshotsNext.addEventListener("click", () => {
 const videoWrapper = document.getElementById("videoWrapper");
 const videoThumbnail = document.getElementById("videoThumbnail");
 
-videoThumbnail.addEventListener("click", () => {
-    videoWrapper.innerHTML = `
-        <iframe
-            src="https://www.youtube.com/embed/0ZWSWcfjAhs?autoplay=1"
-            title="iTreeView Demo Video"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-        </iframe>
-    `;
-});
+if (videoThumbnail && videoWrapper) {
+    videoThumbnail.addEventListener("click", () => {
+        videoWrapper.innerHTML = `
+            <iframe
+                src="https://www.youtube.com/embed/-eYfc1fEL-s?autoplay=1"
+                title="iTreeView Demo Video"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        `;
+    });
+}
 
 </script>
 ```
