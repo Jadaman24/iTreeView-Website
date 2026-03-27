@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iTreeView License Admin</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --border: #334155;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #22c55e;
+      --accent-2: #3b82f6;
+      --danger: #ef4444;
+      --warn: #f59e0b;
+      --input: #0b1220;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Segoe UI, Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #0f172a 100%);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(17, 24, 39, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--input);
+      color: var(--text);
+      outline: none;
+      margin-bottom: 14px;
+    }
+
+    input:focus {
+      border-color: var(--accent-2);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 600;
+      color: white;
+      background: var(--accent-2);
+    }
+
+    button.secondary { background: #475569; }
+    button.success { background: var(--accent); color: #052e16; }
+    button.warn { background: var(--warn); color: #1f1300; }
+    button.danger { background: var(--danger); }
+    button.small { padding: 7px 10px; font-size: 12px; }
+
+    .status {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      min-height: 42px;
+      white-space: pre-wrap;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left, .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .toolbar input {
+      margin-bottom: 0;
+      width: 260px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 10px;
+      border-bottom: 1px solid #263244;
+      vertical-align: top;
+    }
+
+    th {
+      color: #cbd5e1;
+      background: rgba(31, 41, 55, 0.85);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .table-wrap {
+      max-height: 70vh;
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #0b1220;
+    }
+
+    .muted { color: var(--muted); }
+    .mono { font-family: Consolas, Menlo, monospace; font-size: 12px; }
+    .pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .pill.active { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+    .pill.inactive { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; }
+
+    .footer-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>iTreeView License Admin</h1>
+    <div class="sub">Private admin page for your Render licensing API.</div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Connection</h2>
+        <label for="apiBaseUrl">API Base URL</label>
+        <input id="apiBaseUrl" type="text" value="https://itreeview-license-api.onrender.com" />
+
+        <label for="adminToken">Admin Token</label>
+        <input id="adminToken" type="password" placeholder="Paste your Render ADMIN_TOKEN" />
+
+        <div class="row">
+          <button id="loadBtn">Load Licenses</button>
+          <button id="saveTokenBtn" class="secondary">Remember In Browser</button>
+          <button id="clearTokenBtn" class="secondary">Forget Token</button>
+        </div>
+
+        <div id="statusBox" class="status">Ready.</div>
+
+        <div class="footer-note">This page talks to your existing admin endpoints. It does not edit the JSON file directly.</div>
+      </div>
+
+      <div class="card">
+        <h2>Create License</h2>
+        <label for="createEmail">Customer Email</label>
+        <input id="createEmail" type="email" placeholder="customer@email.com" />
+
+        <label for="createExpiry">Expiry (UTC)</label>
+        <input id="createExpiry" type="text" value="2027-01-01T00:00:00Z" />
+
+        <div class="row">
+          <button id="createBtn" class="success">Create License</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <h2 style="margin:0;">Licenses</h2>
+          <span id="licenseCount" class="muted">0 records</span>
+        </div>
+        <div class="toolbar-right">
+          <input id="searchBox" type="text" placeholder="Search email, key, machine ID..." />
+          <button id="refreshBtn" class="secondary">Refresh</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>License Key</th>
+              <th>Machine</th>
+              <th>Expiry</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="licenseTableBody">
+            <tr><td colspan="6" class="muted">No data loaded yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const apiBaseUrlInput = document.getElementById('apiBaseUrl');
+    const adminTokenInput = document.getElementById('adminToken');
+    const statusBox = document.getElementById('statusBox');
+    const licenseTableBody = document.getElementById('licenseTableBody');
+    const licenseCount = document.getElementById('licenseCount');
+    const searchBox = document.getElementById('searchBox');
+    const createEmailInput = document.getElementById('createEmail');
+    const createExpiryInput = document.getElementById('createExpiry');
+
+    let licenses = [];
+
+    function setStatus(message, isError = false) {
+      statusBox.textContent = message;
+      statusBox.style.color = isError ? '#fecaca' : '#cbd5e1';
+      statusBox.style.borderColor = isError ? '#7f1d1d' : '#334155';
+    }
+
+    function getConfig() {
+      const baseUrl = apiBaseUrlInput.value.trim().replace(/\/$/, '');
+      const token = adminTokenInput.value.trim();
+
+      if (!baseUrl) throw new Error('Enter your API base URL.');
+      if (!token) throw new Error('Enter your admin token.');
+
+      return { baseUrl, token };
+    }
+
+    function formatDate(value) {
+      if (!value) return '';
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return value;
+      return d.toLocaleString();
+    }
+
+    function isExpired(value) {
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return false;
+      return d.getTime() < Date.now();
+    }
+
+    function renderTable() {
+      const term = searchBox.value.trim().toLowerCase();
+      const filtered = licenses.filter(x => {
+        const blob = [x.email, x.licenseKey, x.activeMachineId, x.expiryUtc].join(' ').toLowerCase();
+        return blob.includes(term);
+      });
+
+      licenseCount.textContent = `${filtered.length} record${filtered.length === 1 ? '' : 's'}`;
+
+      if (filtered.length === 0) {
+        licenseTableBody.innerHTML = '<tr><td colspan="6" class="muted">No matching licenses.</td></tr>';
+        return;
+      }
+
+      licenseTableBody.innerHTML = filtered.map(row => {
+        const hasMachine = !!row.activeMachineId;
+        const expired = isExpired(row.expiryUtc);
+        const statusText = expired ? 'Expired' : (hasMachine ? 'Active' : 'Available');
+        const statusClass = hasMachine && !expired ? 'active' : 'inactive';
+
+        return `
+          <tr>
+            <td>${escapeHtml(row.email || '')}</td>
+            <td class="mono">${escapeHtml(row.licenseKey || '')}</td>
+            <td class="mono">${escapeHtml(row.activeMachineId || '')}</td>
+            <td>${escapeHtml(formatDate(row.expiryUtc))}</td>
+            <td><span class="pill ${statusClass}">${escapeHtml(statusText)}</span></td>
+            <td>
+              <div class="row">
+                <button class="small secondary" onclick="copyLicenseKey('${jsEscape(row.licenseKey || '')}')">Copy</button>
+                <button class="small warn" onclick="resetLicense('${jsEscape(row.licenseKey || '')}')">Reset</button>
+                <button class="small danger" onclick="deleteLicense('${jsEscape(row.licenseKey || '')}')">Delete</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function jsEscape(value) {
+      return String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+
+    async function apiGet(path) {
+      const { baseUrl, token } = getConfig();
+      const response = await fetch(baseUrl + path, {
+        method: 'GET',
+        headers: {
+          'x-admin-token': token
+        }
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || `Request failed (${response.status})`);
+      return data;
+    }
+
+    async function apiPost(path, body) {
+      const { baseUrl, token } = getConfig();
+      const response = await fetch(baseUrl + path, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-token': token
+        },
+        body: JSON.stringify(body)
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || `Request failed (${response.status})`);
+      return data;
+    }
+
+    async function loadLicenses() {
+      try {
+        setStatus('Loading licenses...');
+        const data = await apiGet('/api/admin/licenses');
+        licenses = Array.isArray(data.licenses) ? data.licenses : [];
+        renderTable();
+        setStatus(`Loaded ${licenses.length} license record(s).`);
+      } catch (err) {
+        setStatus(err.message || 'Failed to load licenses.', true);
+      }
+    }
+
+    async function createLicense() {
+      try {
+        const email = createEmailInput.value.trim();
+        const expiryUtc = createExpiryInput.value.trim();
+
+        if (!email) throw new Error('Enter the customer email.');
+        if (!expiryUtc) throw new Error('Enter the expiry date in UTC format.');
+
+        setStatus('Creating license...');
+        const data = await apiPost('/api/admin/create-license', { email, expiryUtc });
+        setStatus(`Created license: ${data.license?.licenseKey || 'success'}`);
+        createEmailInput.value = '';
+        await loadLicenses();
+      } catch (err) {
+        setStatus(err.message || 'Failed to create license.', true);
+      }
+    }
+
+    async function resetLicense(licenseKey) {
+      if (!confirm(`Reset machine activation for license:\n\n${licenseKey}?`)) return;
+      try {
+        setStatus(`Resetting ${licenseKey}...`);
+        await apiPost('/api/admin/reset-license', { licenseKey });
+        setStatus(`Reset license: ${licenseKey}`);
+        await loadLicenses();
+      } catch (err) {
+        setStatus(err.message || 'Failed to reset license.', true);
+      }
+    }
+
+    async function deleteLicense(licenseKey) {
+      if (!confirm(`Delete license permanently?\n\n${licenseKey}`)) return;
+      try {
+        setStatus(`Deleting ${licenseKey}...`);
+        await apiPost('/api/admin/delete-license', { licenseKey });
+        setStatus(`Deleted license: ${licenseKey}`);
+        await loadLicenses();
+      } catch (err) {
+        setStatus(err.message || 'Failed to delete license.', true);
+      }
+    }
+
+    async function copyLicenseKey(licenseKey) {
+      try {
+        await navigator.clipboard.writeText(licenseKey);
+        setStatus(`Copied license key: ${licenseKey}`);
+      } catch {
+        setStatus('Could not copy license key.', true);
+      }
+    }
+
+    document.getElementById('loadBtn').addEventListener('click', loadLicenses);
+    document.getElementById('refreshBtn').addEventListener('click', loadLicenses);
+    document.getElementById('createBtn').addEventListener('click', createLicense);
+    searchBox.addEventListener('input', renderTable);
+
+    document.getElementById('saveTokenBtn').addEventListener('click', () => {
+      localStorage.setItem('itv_admin_api', apiBaseUrlInput.value.trim());
+      localStorage.setItem('itv_admin_token', adminTokenInput.value.trim());
+      setStatus('Saved API URL and token in this browser.');
+    });
+
+    document.getElementById('clearTokenBtn').addEventListener('click', () => {
+      localStorage.removeItem('itv_admin_api');
+      localStorage.removeItem('itv_admin_token');
+      adminTokenInput.value = '';
+      setStatus('Forgot saved token in this browser.');
+    });
+
+    window.addEventListener('load', () => {
+      const savedApi = localStorage.getItem('itv_admin_api');
+      const savedToken = localStorage.getItem('itv_admin_token');
+      if (savedApi) apiBaseUrlInput.value = savedApi;
+      if (savedToken) adminTokenInput.value = savedToken;
+    });
+
+    window.resetLicense = resetLicense;
+    window.deleteLicense = deleteLicense;
+    window.copyLicenseKey = copyLicenseKey;
+  </script>
+</body>
+</html>
