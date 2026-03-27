@@ -626,6 +626,7 @@ a {
         max-width: 96vw;
         max-height: 76vh;
     }
+}
 
 .hero-image {
     display: flex;
@@ -660,6 +661,38 @@ a {
     height: 100%;
     border: none;
     display: block;
+}
+
+.release-list {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.release-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.release-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.release-date {
+    color: #9db3d2;
+    font-size: 0.9rem;
+}
+
+.release-notes ul {
+    margin-left: 20px;
+}
+
+.release-notes li {
+    color: #d5e0f0;
 }
 
 }
