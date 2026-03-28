@@ -468,7 +468,7 @@ if (buyLicenseBtn) {
             buyLicenseBtn.disabled = true;
             buyLicenseBtn.textContent = "Redirecting...";
 
-            const response = await fetch("https://YOUR-RENDER-URL.onrender.com/create-checkout-session", {
+            const response = await fetch("https://itreeview-license-api.onrender.com/create-checkout-session", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
