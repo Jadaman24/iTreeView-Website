@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recover License | iTreeView</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrap {
+      max-width: 600px;
+      margin: 80px auto;
+      background: #1e293b;
+      padding: 32px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 30px;
+    }
+
+    p {
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-top: 14px;
+      margin-bottom: 14px;
+      border: 1px solid #475569;
+      border-radius: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+      background: #0f172a;
+      color: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    #message {
+      margin-top: 18px;
+      color: #93c5fd;
+      min-height: 24px;
+    }
+
+    a {
+      color: #93c5fd;
+    }
+
+    .small {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Recover Your License</h1>
+
+    <p>
+      Enter the email address used when purchasing iTreeView.
+      If a license exists for that email, it will be emailed to you.
+    </p>
+
+    <input id="email" type="email" placeholder="Enter your purchase email" />
+    <button id="sendBtn">Email My License</button>
+
+    <div id="message"></div>
+
+    <p class="small">
+      If that email exists in our system, your license will be sent there.
+    </p>
+
+    <p class="small">
+      <a href="/">Back to Home</a>
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("sendBtn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message");
+
+      if (!email) {
+        message.textContent = "Please enter your email.";
+        return;
+      }
+
+      message.textContent = "Sending...";
+
+      try {
+        const res = await fetch("https://itreeview-license-api.onrender.com/api/recover-license", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+        message.textContent = data.message || "Request submitted.";
+      } catch (err) {
+        console.error("Recover license request failed:", err);
+        message.textContent = "Something went wrong. Please try again.";
+      }
+    });
+  </script>
+</body>
+</html>
