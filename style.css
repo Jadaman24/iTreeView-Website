@@ -17,6 +17,28 @@ body {
     line-height: 1.5;
 }
 
+.construction-banner {
+    padding: 16px 6%;
+    background: #332710;
+    border-bottom: 1px solid #8a692b;
+    color: #ffedc2;
+    text-align: center;
+}
+
+.construction-banner strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #ffd27a;
+    font-size: 1.05rem;
+}
+
+.construction-banner span {
+    display: block;
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+}
+
 body.no-scroll {
     overflow: hidden;
 }
